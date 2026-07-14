@@ -1,150 +1,236 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useActionState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, GitBranch, Network, Send } from "lucide-react";
-import { MagneticButton } from "./ui/magnetic-button";
-import { Reveal } from "./ui/reveal";
-import { TextReveal } from "./ui/text-reveal";
-import { cn } from "@/lib/utils";
+import { Loader2, CheckCircle, AlertCircle, Mail } from "lucide-react";
+import { submitContact, type ContactState } from "@/app/actions/contact";
 
-const links = [
-  { icon: Mail, label: "Email", value: "siddharth.puhan@example.com", href: "mailto:siddharth.puhan@example.com" },
-  { icon: GitBranch, label: "GitHub", value: "github.com/siddharthpuhan", href: "https://github.com/siddharthpuhan" },
-  { icon: Network, label: "LinkedIn", value: "linkedin.com/in/siddharth-puhan", href: "https://www.linkedin.com/in/siddharth-puhan" },
-];
-
-export function Contact() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
-
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    setStatus("loading");
-    setMessage("");
-
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        subject: formData.get("subject"),
-        message: formData.get("message"),
-      }),
-    });
-
-    const result = (await response.json()) as { ok: boolean; error?: string };
-
-    if (!response.ok || !result.ok) {
-      setStatus("error");
-      setMessage(result.error ?? "Something went wrong.");
-      return;
-    }
-
-    form.reset();
-    setStatus("success");
-    setMessage("Message sent. I'll respond soon.");
-  };
-
+function GithubIcon({ className }: { className?: string }) {
   return (
-    <section id="contact" className="relative px-5 py-32 sm:px-6 lg:px-8 lg:py-44">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-fg-1/[0.02] blur-[160px]" />
-
-      <div className="relative mx-auto max-w-[1400px]">
-        <div className="mb-20 grid gap-8 lg:grid-cols-2 lg:items-end">
-          <TextReveal
-            as="h2"
-            className="text-balance text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.9] tracking-[-0.06em]"
-          >
-            Let&apos;s build
-            <br />
-            <span className="text-fg-6">something serious.</span>
-          </TextReveal>
-          <Reveal className="lg:justify-self-end">
-            <p className="max-w-md text-lg leading-relaxed text-fg-6">
-              Open to internships, product engineering roles, and collaborations with teams
-              that care about craft.
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-          <Reveal className="flex flex-col gap-4">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel="noreferrer"
-                className="group flex items-center gap-5 rounded-3xl border border-line bg-surface p-5 transition-all duration-500 hover:border-line-strong hover:bg-surface-hover"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-line bg-bg-2 text-fg-4 transition group-hover:text-fg-2">
-                  <link.icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-fg-7">{link.label}</p>
-                  <p className="mt-1 font-medium text-fg-2">{link.value}</p>
-                </div>
-                <ArrowUpRight className="ml-auto h-5 w-5 text-fg-7 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg-4" />
-              </a>
-            ))}
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <form onSubmit={onSubmit} className="rounded-[2.5rem] border border-line bg-bg-2/60 p-8 backdrop-blur-sm lg:p-10">
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field label="Name" name="name" placeholder="Your name" />
-                <Field label="Email" name="email" type="email" placeholder="you@company.com" />
-              </div>
-              <div className="mt-5">
-                <Field label="Subject" name="subject" placeholder="Internship, project, collaboration" />
-              </div>
-              <label className="mt-5 block">
-                <span className="mb-2 block text-sm font-medium text-fg-4">Message</span>
-                <textarea
-                  name="message"
-                  required
-                  minLength={20}
-                  placeholder="Tell me what you're building or hiring for."
-                  className="min-h-36 w-full resize-none rounded-2xl border border-line bg-bg-1/80 px-5 py-4 text-sm text-fg-2 outline-none transition placeholder:text-fg-7 focus:border-line-strong focus:ring-4 focus:ring-fg-1/5"
-                />
-              </label>
-              <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <MagneticButton variant="primary">
-                  {status === "loading" ? "Sending..." : "Send message"} <Send className="h-4 w-4" />
-                </MagneticButton>
-                {message ? (
-                  <motion.p
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={cn("text-sm", status === "error" ? "text-red-400" : "text-emerald-400")}
-                  >
-                    {message}
-                  </motion.p>
-                ) : null}
-              </div>
-            </form>
-          </Reveal>
-        </div>
-      </div>
-    </section>
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" width={16} height={16}>
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+    </svg>
   );
 }
 
-function Field({ label, name, type = "text", placeholder }: { label: string; name: string; type?: string; placeholder: string }) {
+function TwitterIcon({ className }: { className?: string }) {
   return (
-    <label className="block">
-      <span className="mb-2 block text-sm font-medium text-fg-4">{label}</span>
-      <input
-        name={name}
-        type={type}
-        required
-        placeholder={placeholder}
-        className="h-12 w-full rounded-2xl border border-line bg-bg-1/80 px-5 text-sm text-fg-2 outline-none transition placeholder:text-fg-7 focus:border-line-strong focus:ring-4 focus:ring-fg-1/5"
-      />
-    </label>
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" width={16} height={16}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+function inputClass(hasError: boolean) {
+  return `w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-fg-primary outline-none transition-colors duration-200 placeholder:text-fg-muted focus:border-fg-primary ${
+    hasError ? "border-red-400" : "border-border"
+  }`;
+}
+
+export function Contact() {
+  const [state, action, pending] = useActionState<ContactState | undefined, FormData>(
+    submitContact,
+    undefined,
+  );
+  const success = state?.ok === true;
+  const fieldErrors = state?.fieldErrors;
+
+  return (
+    <section id="contact" className="px-6 py-24 sm:px-10 lg:px-16">
+      <div className="mx-auto max-w-[600px]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+        >
+          <span className="section-subheading">Get In Touch</span>
+          <h2 className="mt-2 section-heading">Contact Me</h2>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-5 text-base leading-relaxed text-fg-secondary prose"
+        >
+          Have a project, opportunity, or just want to say hi? Send me a message — I read everything.
+        </motion.p>
+
+        {success && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="mt-10 flex flex-col items-center gap-4 rounded-2xl border border-green-200 bg-green-50 px-6 py-10 text-center"
+          >
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.15, type: "spring", stiffness: 260, damping: 18 }}
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100"
+            >
+              <CheckCircle className="h-8 w-8 text-green-600" />
+            </motion.span>
+            <div>
+              <p className="text-lg font-semibold text-green-800">Message sent successfully!</p>
+              <p className="mt-2 text-sm leading-relaxed text-green-700">
+                Thank you for reaching out. A confirmation email is on its way to your inbox, and I&apos;ll get back to you within 24&ndash;48 hours.
+              </p>
+            </div>
+          </motion.div>
+        )}
+
+        {!success && (
+          <motion.form
+            key="form"
+            action={action}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-10 space-y-5"
+            noValidate
+          >
+            <div style={{ position: "absolute", left: "-9999px" }} aria-hidden>
+              <label htmlFor="website">Website</label>
+              <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
+
+            <div>
+              <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-fg-primary">
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                maxLength={100}
+                aria-invalid={fieldErrors?.name ? true : undefined}
+                className={inputClass(!!fieldErrors?.name)}
+                placeholder="Your name"
+              />
+              {fieldErrors?.name && (
+                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.name}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-fg-primary">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                maxLength={200}
+                aria-invalid={fieldErrors?.email ? true : undefined}
+                className={inputClass(!!fieldErrors?.email)}
+                placeholder="your@email.com"
+              />
+              {fieldErrors?.email && (
+                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.email}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-fg-primary">
+                Subject
+              </label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                required
+                maxLength={200}
+                aria-invalid={fieldErrors?.subject ? true : undefined}
+                className={inputClass(!!fieldErrors?.subject)}
+                placeholder="What is this about?"
+              />
+              {fieldErrors?.subject && (
+                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.subject}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-fg-primary">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                minLength={20}
+                maxLength={5000}
+                rows={5}
+                aria-invalid={fieldErrors?.message ? true : undefined}
+                className={`${inputClass(!!fieldErrors?.message)} resize-y`}
+                placeholder="Tell me about your project, opportunity, or anything else..."
+              />
+              {fieldErrors?.message && (
+                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.message}</p>
+              )}
+            </div>
+
+            {state && "error" in state && state.error && (
+              <motion.div
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 p-3"
+              >
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
+                <p className="text-sm text-red-700">{state.error}</p>
+              </motion.div>
+            )}
+
+            <button
+              type="submit"
+              disabled={pending}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-fg-primary px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:shadow-[0_4px_16px_rgba(37,99,235,0.25)] hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {pending && <Loader2 className="h-4 w-4 animate-spin" />}
+              {pending ? "Sending..." : "Send Message"}
+            </button>
+          </motion.form>
+        )}
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-14 flex flex-wrap gap-6 border-t border-border pt-8"
+        >
+          <a
+            href="mailto:puhansiddharth@gmail.com"
+            className="link-underline flex items-center gap-2 text-sm font-medium text-fg-secondary transition-colors duration-200 hover:text-accent-hover"
+          >
+            <Mail className="h-4 w-4 transition-transform duration-200 group-hover:rotate-4" />
+            puhansiddharth@gmail.com
+          </a>
+          <a
+            href="https://github.com/siddpuhan"
+            target="_blank"
+            rel="noreferrer"
+            className="link-underline flex items-center gap-2 text-sm font-medium text-fg-secondary transition-colors duration-200 hover:text-accent-hover"
+          >
+            <GithubIcon className="h-4 w-4 transition-transform duration-200 group-hover:rotate-4" />
+            GitHub
+          </a>
+          <a
+            href="https://x.com/SPuhan80780"
+            target="_blank"
+            rel="noreferrer"
+            className="link-underline flex items-center gap-2 text-sm font-medium text-fg-secondary transition-colors duration-200 hover:text-accent-hover"
+          >
+            <TwitterIcon className="h-4 w-4 transition-transform duration-200 group-hover:rotate-4" />
+            X / Twitter
+          </a>
+        </motion.div>
+      </div>
+    </section>
   );
 }

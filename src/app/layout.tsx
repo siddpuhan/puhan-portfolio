@@ -1,33 +1,37 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Inter, Space_Grotesk, Geist } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-clash",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://siddharth-puhan.dev"),
-  title: {
-    default: "Siddharth Puhan — AI Software Engineer",
-    template: "%s | Siddharth Puhan",
-  },
+  title: "Siddharth Puhan | Full Stack Developer",
   description:
-    "Premium software engineering portfolio of Siddharth Puhan, an AI-focused full-stack engineer building startup-grade products with Next.js, TypeScript, and modern infrastructure.",
+    "Portfolio showcasing AI-powered full-stack applications including ThinkRoom AI, PhishGuard AI, and Kropify.",
   keywords: [
-    "Siddharth Puhan",
-    "AI Software Engineer",
-    "Full Stack Developer",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "AI Engineer",
-    "Startup Engineer",
-    "Product Engineer",
+    "Siddharth Puhan", "Full Stack Developer", "AI Product Builder",
+    "Next.js", "React", "TypeScript", "ThinkRoom AI", "PhishGuard AI", "Kropify",
   ],
   authors: [{ name: "Siddharth Puhan" }],
   creator: "Siddharth Puhan",
   openGraph: {
-    title: "Siddharth Puhan — AI Software Engineer",
-    description: "Building AI-powered software that feels like a product, not a project.",
+    title: "Siddharth Puhan | Full Stack Developer",
+    description: "Building intelligent full-stack applications with modern web technologies and practical AI.",
     url: "https://siddharth-puhan.dev",
     siteName: "Siddharth Puhan",
     locale: "en_IN",
@@ -35,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Siddharth Puhan — AI Software Engineer",
-    description: "Startup-grade AI software engineering portfolio.",
+    title: "Siddharth Puhan | Full Stack Developer",
+    description: "AI-powered full-stack applications.",
   },
   robots: { index: true, follow: true },
 };
@@ -44,19 +48,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  colorScheme: "dark light",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#050505" },
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-  ],
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
-      <body
-        className={`${GeistSans.variable} ${GeistMono.variable} cursor-none font-sans antialiased`}
-      >
+    <html lang="en" className={cn(inter.variable, spaceGrotesk.variable, "font-sans", geist.variable)} suppressHydrationWarning>
+      <body className="font-sans antialiased">
         {children}
       </body>
     </html>

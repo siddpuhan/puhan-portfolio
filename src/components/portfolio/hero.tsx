@@ -1,167 +1,152 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDownRight } from "lucide-react";
-import { MagneticButton } from "./ui/magnetic-button";
-import { TextReveal } from "./ui/text-reveal";
+import { motion } from "framer-motion";
+import { ArrowDown, Download, Mail } from "lucide-react";
+import { HeroVisualization } from "./hero-visualization";
+
+function GithubIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" width={16} height={16}>
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+
+function TwitterIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" width={16} height={16}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+const socialLinks = [
+  { icon: GithubIcon, label: "GitHub", href: "https://github.com/siddpuhan" },
+  { icon: TwitterIcon, label: "X / Twitter", href: "https://x.com/SPuhan80780" },
+  { icon: Mail, label: "Email", href: "mailto:puhansiddharth@gmail.com" },
+];
 
 export function Hero() {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 800], [0, 160]);
-  const y2 = useTransform(scrollY, [0, 800], [0, -80]);
-  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
-
   return (
     <section
-      id="top"
-      className="relative flex min-h-screen items-end px-5 pb-20 pt-32 sm:px-6 lg:items-center lg:pb-0 lg:pt-0"
+      id="hero"
+      className="relative flex min-h-screen items-center overflow-hidden px-6 py-24 sm:px-10 lg:px-16"
+      style={{ paddingTop: "8rem", paddingBottom: "6rem" }}
     >
-      <motion.div
-        style={{ y: y1, opacity }}
-        className="pointer-events-none absolute right-[-10%] top-[-10%] h-[60vh] w-[60vh] rounded-full bg-gradient-to-br from-fg-1/5 to-transparent blur-[120px]"
-      />
-      <motion.div
-        style={{ y: y2 }}
-        className="pointer-events-none absolute bottom-[10%] left-[-10%] h-[40vh] w-[40vh] rounded-full bg-gradient-to-tr from-fg-1/[0.03] to-transparent blur-[100px]"
-      />
+      <div className="mx-auto grid w-full max-w-[1200px] items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="max-w-[580px]"
+        >
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-0.5 text-[11px] font-medium uppercase tracking-[0.1em] text-fg-muted"
+          >
+            <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+              <motion.span
+                className="absolute inset-0 rounded-full bg-accent-hover"
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0.4, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <span className="relative rounded-full bg-accent-hover" />
+            </span>
+            Available for Internships
+          </motion.span>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1400px] gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div>
-          <motion.div
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8 inline-flex items-center gap-3 rounded-full border border-line bg-surface px-4 py-2"
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="mt-5 font-display text-[clamp(2.8rem,7vw,5rem)] font-bold leading-[1.02] tracking-[-0.04em] text-fg-primary"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-            </span>
-            <span className="text-sm font-medium text-fg-4">Available for internships & product roles</span>
-          </motion.div>
-
-          <h1 className="text-balance text-[clamp(3rem,10vw,8.5rem)] font-semibold leading-[0.85] tracking-[-0.07em]">
-            <TextReveal delay={0.3}>AI Software</TextReveal>
+            Siddharth
             <br />
-            <TextReveal delay={0.42} className="text-fg-5">
-              Engineer
-            </TextReveal>
-          </h1>
+            Puhan
+          </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.7 }}
-            className="mt-8 max-w-xl text-balance text-lg leading-relaxed text-fg-5 sm:text-xl"
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-6 max-w-[480px] text-base leading-[1.8] text-fg-secondary sm:text-lg"
           >
-            Siddharth Puhan. Building startup-grade AI products with modern full-stack
-            engineering. From a Tier-3 college in India, shipping with Tier-1 discipline.
+            I build intelligent full-stack applications with modern web technologies and practical AI — focused on real-world impact.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.85 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <MagneticButton href="#projects" variant="primary">
-              View Projects <ArrowDownRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-            </MagneticButton>
-            <MagneticButton href="#contact" variant="secondary">
-              Let&apos;s talk
-            </MagneticButton>
-            <MagneticButton href="/Siddharth-Puhan-Resume.txt" variant="ghost" download>
-              Download Resume
-            </MagneticButton>
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 rounded-lg bg-fg-primary px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:shadow-[0_4px_16px_rgba(37,99,235,0.25)] hover:scale-[1.02] active:scale-[0.98]"
+            >
+              View Projects
+            </a>
+            <a
+              href="/Siddharth-Puhan-Resume.txt"
+              download
+              className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium text-fg-primary transition-all duration-200 hover:border-border-hover hover:bg-surface hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <Download className="h-4 w-4" />
+              Resume
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-12 flex items-center gap-7"
+          >
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                className="flex items-center gap-2 text-sm text-fg-secondary transition-colors duration-200 hover:text-accent-hover"
+              >
+                <link.icon className="h-4 w-4" />
+                <span className="hidden sm:inline">{link.label}</span>
+              </a>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        <div className="flex justify-center lg:justify-end">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative aspect-square w-full max-w-[520px]"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white to-white opacity-60" aria-hidden="true" />
+            <HeroVisualization />
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, rotateX: 10 }}
-          animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-          transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          style={{ y: y2 }}
-          className="relative hidden lg:block"
-        >
-          <div className="absolute -inset-8 rounded-[3rem] bg-gradient-to-br from-fg-1/5 via-transparent to-fg-1/[0.02] blur-2xl" />
-          <div className="relative overflow-hidden rounded-[2.5rem] border border-line bg-bg-2/80 p-6 shadow-[0_40px_100px_rgba(0,0,0,0.4)] backdrop-blur-xl">
-            <div className="mb-6 flex items-center justify-between border-b border-line pb-4">
-              <div className="flex gap-2">
-                <span className="h-3 w-3 rounded-full bg-fg-8" />
-                <span className="h-3 w-3 rounded-full bg-fg-7" />
-                <span className="h-3 w-3 rounded-full bg-fg-6" />
-              </div>
-              <span className="font-mono text-xs text-fg-7">~/mission.ts</span>
-            </div>
-            <div className="space-y-4 font-mono text-sm leading-7">
-              <div className="flex gap-2">
-                <span className="text-fg-7">1</span>
-                <span>
-                  <span className="text-fg-6">const</span>{" "}
-                  <span className="text-fg-2">engineer</span> = {"{"}
-                </span>
-              </div>
-              <div className="flex gap-2 pl-4">
-                <span className="text-fg-7">2</span>
-                <span>
-                  name: <span className="text-fg-4">&quot;Siddharth Puhan&quot;</span>,
-                </span>
-              </div>
-              <div className="flex gap-2 pl-4">
-                <span className="text-fg-7">3</span>
-                <span>
-                  focus: <span className="text-fg-4">&quot;AI-powered products&quot;</span>,
-                </span>
-              </div>
-              <div className="flex gap-2 pl-4">
-                <span className="text-fg-7">4</span>
-                <span>
-                  stack: [<span className="text-fg-4">&quot;Next.js&quot;</span>,{" "}
-                  <span className="text-fg-4">&quot;TypeScript&quot;</span>,{" "}
-                  <span className="text-fg-4">&quot;AI APIs&quot;</span>],
-                </span>
-              </div>
-              <div className="flex gap-2 pl-4">
-                <span className="text-fg-7">5</span>
-                <span>
-                  goal: <span className="text-fg-4">&quot;Build products that earn trust&quot;</span>,
-                </span>
-              </div>
-              <div className="flex gap-2">
-                <span className="text-fg-7">6</span>
-                <span>{"}"};</span>
-              </div>
-            </div>
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              {[
-                { label: "Learning", value: "Daily" },
-                { label: "Standard", value: "High" },
-                { label: "Output", value: "Shipped" },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl border border-line bg-surface p-4"
-                >
-                  <p className="text-xs text-fg-7">{item.label}</p>
-                  <p className="mt-1 text-sm font-semibold text-fg-2">{item.value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 1 }}
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:block"
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="h-14 w-[1px] bg-gradient-to-b from-fg-7 to-transparent"
-        />
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 3, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
+          className="flex items-center gap-2 text-xs text-fg-muted"
+        >
+          <ArrowDown className="h-3 w-3" />
+          Scroll
+        </motion.div>
       </motion.div>
     </section>
   );
