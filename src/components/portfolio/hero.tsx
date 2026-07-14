@@ -90,8 +90,9 @@ export function Hero() {
               View Projects
             </a>
             <a
-              href="/Siddharth-Puhan-Resume.txt"
-              download
+              href="/siddharth_resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium text-fg-primary transition-all duration-200 hover:border-border-hover hover:bg-surface hover:scale-[1.02] active:scale-[0.98]"
             >
               <Download className="h-4 w-4" />

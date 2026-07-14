@@ -18,10 +18,9 @@ const Github = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const navLinks = [
+  { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
 

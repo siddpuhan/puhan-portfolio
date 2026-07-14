@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Award, BookOpen, Code, Download, Sparkles, Target } from "lucide-react";
+import { Award, BookOpen, Code, Download, Rocket, Sparkles, Target, Code2 } from "lucide-react";
 
 const skillCategories = [
   {
@@ -51,7 +51,7 @@ const achievements = [
   {
     icon: Award,
     title: "AceHack 4.0 (MLH)",
-    subtitle: "Track Winner — Best Use of Auth0",
+    subtitle: "Track Winner - Best Use of Auth0",
     description: "Recognized for best implementation of authentication in a hackathon project.",
   },
   {
@@ -68,11 +68,17 @@ const focusItems = [
   "Machine Learning",
 ];
 
+const highlights = [
+  { icon: Code2, label: "Full-Stack Development" },
+  { icon: Rocket, label: "AI Products" },
+  { icon: Target, label: "Problem Solving" },
+];
+
 export function About() {
   return (
     <section id="about" className="relative">
       <div className="relative z-10 px-6 py-24 sm:px-10 lg:px-16">
-        <div className="mx-auto max-w-[1200px]">
+        <div className="mx-auto max-w-[1280px]">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -84,7 +90,7 @@ export function About() {
             <span className="section-subheading inline-block">Introduction</span>
             <h2 className="mt-4 section-heading text-3xl sm:text-4xl lg:text-5xl">About Me</h2>
             <p className="mt-6 text-lg leading-[1.8] text-fg-secondary max-w-xl mx-auto">
-              I build intelligent full-stack applications with modern web technologies and practical AI — focused on real-world impact.
+              I build intelligent full-stack applications with modern web technologies and practical AI - focused on real-world impact.
             </p>
           </motion.div>
 
@@ -95,7 +101,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid lg:grid-cols-2 gap-12 items-start"
+              className="grid lg:grid-cols-2 gap-[80px] items-start"
             >
               <div className="space-y-6">
                 <div className="space-y-5 text-base leading-[1.8] text-fg-secondary">
@@ -107,56 +113,118 @@ export function About() {
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-4 pt-4">
-                  <a
-                    href="#projects"
-                    className="btn-primary"
-                  >
-                    View Projects
-                    <ArrowDown className="h-4 w-4" />
-                  </a>
-                  <a
-                    href="/Siddharth-Puhan-Resume.txt"
-                    download
-                    className="btn-secondary"
-                  >
-                    <Download className="h-4 w-4" />
-                    Download Resume
-                  </a>
-                </div>
-              </div>
-
-              <div className="space-y-6">
+                {/* Highlight Items */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="relative aspect-square max-w-md mx-auto"
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="pt-6 flex flex-wrap items-center gap-6 sm:gap-8"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white to-white opacity-60 rounded-3xl" aria-hidden="true" />
-                  <div className="relative rounded-3xl bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-8 border border-border shadow-xl">
-                    <div className="grid gap-4 text-center">
-                      <div className="p-4 rounded-2xl bg-white border border-border shadow-sm">
-                        <Code className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                        <p className="text-sm font-medium text-fg-primary">Full-Stack Developer</p>
-                        <p className="text-xs text-fg-muted">React, Next.js, Node.js, TypeScript</p>
-                      </div>
-                      <div className="p-4 rounded-2xl bg-white border border-border shadow-sm">
-                        <Sparkles className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                        <p className="text-sm font-medium text-fg-primary">AI Integration</p>
-                        <p className="text-xs text-fg-muted">Groq, Gemini, Prompt Engineering</p>
-                      </div>
-                      <div className="p-4 rounded-2xl bg-white border border-border shadow-sm">
-                        <Target className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                        <p className="text-sm font-medium text-fg-primary">Problem Solving</p>
-                        <p className="text-xs text-fg-muted">DSA, Algorithms, System Design</p>
-                      </div>
-                    </div>
-                  </div>
+                  {highlights.map((item, index) => (
+                    <motion.span
+                      key={item.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      className="inline-flex items-center gap-2 text-sm text-fg-secondary"
+                    >
+                      <item.icon className="h-4 w-4 text-fg-muted" aria-hidden="true" />
+                      <span className="font-medium text-fg-primary">{item.label}</span>
+                    </motion.span>
+                  ))}
                 </motion.div>
               </div>
+
+              {/* Right Column - Premium Cards Panel */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="flex items-start justify-center"
+              >
+                <div className="relative w-full max-w-sm">
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white to-white opacity-60 rounded-3xl" aria-hidden="true" />
+                  <div className="relative rounded-3xl bg-[rgba(248,250,252,0.75)] backdrop-blur-md p-4 border border-[rgba(226,232,240,0.8)] shadow-xl">
+                  <div className="grid gap-4">
+                    {/* Card 1: Building AI Products */}
+                    <motion.article
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
+                      className="group relative rounded-3xl border border-border bg-white p-4 text-center transition-all duration-300 hover:shadow-xl"
+                    >
+                      <motion.div
+                        animate={{ scale: [1, 1.08, 1] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        className="relative mb-3"
+                      >
+                        <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                          <Rocket className="h-6 w-6" aria-hidden="true" />
+                        </div>
+                      </motion.div>
+                      <h3 className="font-semibold text-xl text-fg-primary">Building AI Products</h3>
+                      <p className="mt-1.5 font-medium text-base text-fg-secondary">ThinkRoom AI • PhishGuard • Kropify</p>
+                      <p className="mt-1 text-sm text-fg-muted">End-to-end full-stack applications powered by modern AI.</p>
+                    </motion.article>
+
+                    {/* Card 2: Modern Tech Stack */}
+                    <motion.article
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
+                      className="group relative rounded-3xl border border-border bg-white p-4 text-center transition-all duration-300 hover:shadow-xl"
+                    >
+                      <motion.div
+                        animate={{ scale: [1, 1.08, 1] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        className="relative mb-3"
+                      >
+                        <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-purple-50 text-purple-600">
+                          <Code2 className="h-6 w-6" aria-hidden="true" />
+                        </div>
+                      </motion.div>
+                      <h3 className="font-semibold text-xl text-fg-primary">Modern Tech Stack</h3>
+                      <p className="mt-1.5 font-medium text-base text-fg-secondary">React • Next.js • Node.js • TypeScript</p>
+                      <p className="mt-1 text-sm text-fg-muted">Scalable frontend, backend and real-time applications.</p>
+                    </motion.article>
+
+                    {/* Card 3: Currently Learning */}
+                    <motion.article
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.24, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
+                      className="group relative rounded-3xl border border-border bg-white p-4 text-center transition-all duration-300 hover:shadow-xl"
+                    >
+                      <motion.div
+                        animate={{ scale: [1, 1.08, 1] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        className="relative mb-3"
+                      >
+                        <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
+                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-50 text-green-600">
+                          <Target className="h-6 w-6" aria-hidden="true" />
+                        </div>
+                      </motion.div>
+                      <h3 className="font-semibold text-xl text-fg-primary">Currently Learning</h3>
+                      <p className="mt-1.5 font-medium text-base text-fg-secondary">DSA • MERN • Machine Learning</p>
+                      <p className="mt-1 text-sm text-fg-muted">Continuously improving problem solving and AI engineering.</p>
+                    </motion.article>
+                  </div>
+                </div>
+              </div>
             </motion.div>
+          </motion.div>
 
             {/* Skills Section */}
             <motion.div
@@ -249,33 +317,6 @@ export function About() {
                     {item}
                   </motion.span>
                 ))}
-              </div>
-            </motion.div>
-
-            {/* Resume Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="pt-8 border-t border-border"
-            >
-              <div className="text-center max-w-2xl mx-auto">
-                <span className="section-subheading">Experience</span>
-                <h3 className="mt-2 section-heading">Resume</h3>
-                <p className="mt-4 text-base leading-[1.8] text-fg-secondary">
-                  Detailed overview of my education, experience, and projects.
-                </p>
-                <div className="mt-8">
-                  <a
-                    href="/Siddharth-Puhan-Resume.txt"
-                    download
-                    className="btn-primary inline-flex"
-                  >
-                    <Download className="h-4 w-4" />
-                    Download Resume
-                  </a>
-                </div>
               </div>
             </motion.div>
           </div>

@@ -5,17 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const sections = [
+  { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
 
 const mobileSections = [
+  { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Focus", href: "#focus" },
-  { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
 
