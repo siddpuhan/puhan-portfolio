@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -17,48 +18,32 @@ const projects = [
     title: "ThinkRoom AI",
     description: "An AI-powered collaborative workspace that transforms conversations into structured knowledge by automatically extracting tasks, summaries, and key decisions in real time.",
     category: "AI Productivity",
-    tech: ["React.js", "Node.js", "Express.js", "Socket.IO", "PostgreSQL", "Groq API", "JWT"],
     github: "https://github.com/siddpuhan/thinkroom-AI",
     demo: "https://jointhinkroom.vercel.app/",
-    gradient: "from-blue-600 via-blue-500 to-indigo-600",
-    accent: "blue",
-    from: "rgb(37 99 235)",
-    via: "rgb(59 130 246)",
-    to: "rgb(79 70 229)",
+    image: "/projects/thinkroom.png",
   },
   {
     id: "phishguard",
     title: "PhishGuard AI",
     description: "An AI-powered phishing detection platform that analyzes suspicious URLs using LLMs and provides explainable threat analysis instead of simple safe/unsafe results.",
     category: "AI Security",
-    tech: ["React", "Node.js", "Express", "Supabase", "Groq API", "JWT"],
     github: "https://github.com/siddpuhan/PhishGUARD",
     demo: "https://phish-guard-bay.vercel.app/",
-    gradient: "from-emerald-600 via-emerald-500 to-teal-600",
-    accent: "emerald",
-    from: "rgb(5 150 105)",
-    via: "rgb(16 185 129)",
-    to: "rgb(13 148 136)",
+    image: "/projects/phishguard.png",
   },
   {
     id: "kropify",
     title: "Kropify",
     description: "An AI-powered crop yield prediction platform that leverages Google Gemini to generate intelligent agricultural insights from user-provided farming data.",
     category: "AI Agriculture",
-    tech: ["React", "Node.js", "Express", "Gemini API"],
     github: "https://github.com/siddpuhan/Kropify",
     demo: "https://kropify.vercel.app/",
-    gradient: "from-amber-600 via-amber-500 to-yellow-600",
-    accent: "amber",
-    from: "rgb(217 119 6)",
-    via: "rgb(245 158 11)",
-    to: "rgb(234 179 8)",
+    image: "/projects/kropify.png",
   },
 ];
 
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   const isEven = index % 2 === 0;
-  const gradientStyle = `linear-gradient(135deg, ${project.from}, ${project.via}, ${project.to})`;
 
   return (
     <motion.article
@@ -75,7 +60,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-surface px-3 py-1 text-[11px] font-medium uppercase tracking-[0.1em] text-fg-muted"
           >
-            <span className={`relative h-1.5 w-1.5 rounded-full bg-${project.accent}-500`} aria-hidden="true" />
+            <span className="relative h-1.5 w-1.5 rounded-full bg-blue-500" aria-hidden="true" />
             {project.category}
           </motion.span>
 
@@ -94,20 +79,6 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           >
             {project.description}
           </motion.p>
-
-          <div className="mt-7 flex flex-wrap gap-2" role="list" aria-label={`${project.title} technologies`}>
-            {project.tech.map((t, i) => (
-              <motion.span
-                key={t}
-                whileHover={{ scale: 1.08, y: -2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="rounded-lg border border-border/60 bg-white/80 px-3 py-1 text-sm font-medium text-fg-secondary backdrop-blur-sm"
-                role="listitem"
-              >
-                {t}
-              </motion.span>
-            ))}
-          </div>
 
           <div className="mt-8 flex items-center gap-6">
             <motion.a
@@ -137,20 +108,25 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </div>
         </div>
 
-        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden" style={{ gridArea: isEven ? undefined : "media", background: gradientStyle }}>
-          <motion.div
-            className="absolute inset-0"
-            animate={{ scale: 1 }}
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
-              <span className="font-display text-5xl font-bold tracking-tight text-white/20 sm:text-6xl">
-                {project.title.split(" ").map(w => w[0]).join("")}
-              </span>
+        <div className="relative aspect-[4/3] group" style={{ gridArea: isEven ? undefined : "media" }}>
+          <div className="relative w-full h-full rounded-2xl border border-border/40 bg-white shadow-lg overflow-hidden">
+            <div className="flex items-center gap-1.5 px-3 py-2.5 bg-white border-b border-border/40">
+              <div className="w-3 h-3 rounded-full bg-red-400" />
+              <div className="w-3 h-3 rounded-full bg-yellow-400" />
+              <div className="w-3 h-3 rounded-full bg-green-400" />
             </div>
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
-          </motion.div>
+            <div className="relative w-full h-[calc(100%-36px)] bg-[var(--mockup-bg)] p-5 overflow-hidden flex items-center justify-center">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain transition-all duration-500 ease-[0.25,0.46,0.45,0.94] group-hover:scale-103 group-hover:-translate-y-2 group-hover:brightness-105"
+                priority={index < 2}
+                style={{ objectFit: "contain", backgroundColor: "#f8fafc" }}
+              />
+            </div>
+          </div>
 
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 pointer-events-none">
             <div className="rounded-lg bg-white/90 backdrop-blur-sm px-3 py-1.5 text-[11px] font-medium text-fg-secondary">
