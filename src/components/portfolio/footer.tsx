@@ -39,7 +39,7 @@ function CopyToast({ visible }: { visible: boolean }) {
       initial={{ opacity: 0, y: 4 }}
       animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
       transition={{ duration: 0.2 }}
-      className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2.5 py-1 text-[11px] text-black shadow-sm"
+      className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2.5 py-1 text-[11px] text-fg-primary shadow-sm"
     >
       Copied!
     </motion.span>
@@ -59,7 +59,7 @@ export function Footer() {
     }
   };
 
-  return (
+return (
     <footer className="relative overflow-hidden border-t border-border">
       <div className="absolute inset-0 z-0">
         {/* PUHAN — behind the ASCII texture, darker & recognizable, no blur */}
@@ -67,10 +67,10 @@ export function Footer() {
           className="pointer-events-none absolute inset-0 select-none overflow-hidden font-display font-black leading-[0.8]"
           aria-hidden
           style={{
-            color: "#6B7280",
+            color: "var(--fg-muted)",
             opacity: 0.14,
             letterSpacing: "0.12em",
-            WebkitTextStroke: "1.5px #000000",
+            WebkitTextStroke: "1.5px var(--footer-watermark)",
             fontSize: "clamp(12rem, 22vw, 26rem)",
             WebkitMaskImage:
               "radial-gradient(120% 120% at 50% 100%, black 35%, transparent 80%)",
@@ -108,17 +108,17 @@ export function Footer() {
         <div className="mx-auto grid max-w-[1200px] items-start gap-12 md:grid-cols-3 md:gap-20">
           {/* Left — Brand */}
           <div>
-            <h3 className="font-display text-2xl font-bold tracking-tight text-black">
+            <h3 className="font-display text-2xl font-bold tracking-tight text-fg-primary">
               Siddharth Puhan
             </h3>
-            <p className="mt-4 max-w-[340px] text-base leading-relaxed text-black">
+            <p className="mt-4 max-w-[340px] text-base leading-relaxed text-fg-secondary">
               Full Stack Developer focused on building AI-powered products with modern web technologies, scalable backend systems, and thoughtful user experiences.
             </p>
           </div>
 
           {/* Center — Navigation */}
           <div>
-            <h4 className="text-[12px] font-medium uppercase tracking-[0.15em] text-black">
+            <h4 className="text-[12px] font-medium uppercase tracking-[0.15em] text-fg-muted">
               Navigation
             </h4>
             <ul className="mt-5 space-y-3">
@@ -126,7 +126,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="link-underline text-lg leading-relaxed text-black transition-colors duration-200 hover:text-black"
+                    className="link-underline text-lg leading-relaxed text-fg-primary transition-colors duration-200 hover:text-accent-hover"
                   >
                     {link.label}
                   </a>
@@ -137,7 +137,7 @@ export function Footer() {
 
           {/* Right — Contact */}
           <div>
-            <h4 className="text-[12px] font-medium uppercase tracking-[0.15em] text-black">
+            <h4 className="text-[12px] font-medium uppercase tracking-[0.15em] text-fg-muted">
               Contact
             </h4>
             <ul className="mt-5 space-y-4">
@@ -145,7 +145,7 @@ export function Footer() {
                 <button
                   type="button"
                   onClick={() => handleCopy("puhansiddharth@gmail.com")}
-                  className="group relative flex items-center gap-2.5 text-lg leading-relaxed text-black transition-colors duration-200 hover:text-black"
+                  className="group relative flex items-center gap-2.5 text-lg leading-relaxed text-fg-primary transition-colors duration-200 hover:text-accent-hover"
                 >
                   <Mail className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
                   <span className="link-underline">puhansiddharth@gmail.com</span>
@@ -158,7 +158,7 @@ export function Footer() {
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
-                    className="group inline-flex items-center gap-2.5 text-lg leading-relaxed text-black transition-colors duration-200 hover:text-black"
+                    className="group inline-flex items-center gap-2.5 text-lg leading-relaxed text-fg-primary transition-colors duration-200 hover:text-accent-hover"
                   >
                     <link.icon className="h-4 w-4 transition-transform duration-200 group-hover:scale-110" />
                     <span>{link.label}</span>
@@ -171,18 +171,18 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mx-auto mt-20 max-w-[1200px] border-t border-border pt-8">
-          <div className="flex flex-col items-center gap-4 text-center text-sm text-black sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:text-left">
+          <div className="flex flex-col items-center gap-4 text-center text-sm text-fg-secondary sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:text-left">
             <p className="order-1">
               &copy; {new Date().getFullYear()} Siddharth Puhan
             </p>
             <p className="order-3 sm:order-2">
-              Designed &amp; Developed by Siddharth Puhan
+              Designed & Developed by Siddharth Puhan
             </p>
             <p className="order-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:order-3 sm:justify-end">
               <span>Built with</span>
               {techStack.map((tech, i) => (
                 <span key={tech} className="inline-flex items-center">
-                  <span className="text-black">{tech}</span>
+                  <span className="text-fg-secondary">{tech}</span>
                   {i < techStack.length - 1 && <span className="ml-2">·</span>}
                 </span>
               ))}

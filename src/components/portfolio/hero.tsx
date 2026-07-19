@@ -85,7 +85,7 @@ export function Hero() {
           >
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-lg bg-fg-primary px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:shadow-[0_4px_16px_rgba(37,99,235,0.25)] hover:scale-[1.02] active:scale-[0.98]"
+              className="btn-primary"
             >
               View Projects
             </a>
@@ -93,7 +93,7 @@ export function Hero() {
               href="/siddharth_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium text-fg-primary transition-all duration-200 hover:border-border-hover hover:bg-surface hover:scale-[1.02] active:scale-[0.98]"
+              className="btn-secondary"
             >
               <Download className="h-4 w-4" />
               Resume
@@ -128,7 +128,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative aspect-square w-full max-w-[520px]"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white to-white opacity-60" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-bg to-bg opacity-60" aria-hidden="true" />
             <HeroVisualization />
           </motion.div>
         </div>

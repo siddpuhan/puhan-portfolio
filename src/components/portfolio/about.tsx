@@ -146,8 +146,8 @@ export function About() {
                 className="flex items-start justify-center"
               >
                 <div className="relative w-full max-w-sm">
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white to-white opacity-60 rounded-3xl" aria-hidden="true" />
-                  <div className="relative rounded-3xl bg-[rgba(248,250,252,0.75)] backdrop-blur-md p-4 border border-[rgba(226,232,240,0.8)] shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-bg to-bg opacity-60 rounded-3xl" aria-hidden="true" />
+                  <div className="relative rounded-3xl bg-card-bg/75 backdrop-blur-md p-4 border border-card-border shadow-xl">
                   <div className="grid gap-4">
                     {/* Card 1: Building AI Products */}
                     <motion.article
@@ -156,7 +156,7 @@ export function About() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0, ease: [0.25, 0.46, 0.45, 0.94] }}
                       whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
-                      className="group relative rounded-3xl border border-border bg-white p-4 text-center transition-all duration-300 hover:shadow-xl"
+                      className="group relative rounded-3xl border border-border bg-card-bg p-4 text-center transition-all duration-300 hover:shadow-xl"
                     >
                       <motion.div
                         animate={{ scale: [1, 1.08, 1] }}
@@ -164,7 +164,7 @@ export function About() {
                         className="relative mb-3"
                       >
                         <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400">
                           <Rocket className="h-6 w-6" aria-hidden="true" />
                         </div>
                       </motion.div>
@@ -180,7 +180,7 @@ export function About() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
                       whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
-                      className="group relative rounded-3xl border border-border bg-white p-4 text-center transition-all duration-300 hover:shadow-xl"
+                      className="group relative rounded-3xl border border-border bg-card-bg p-4 text-center transition-all duration-300 hover:shadow-xl"
                     >
                       <motion.div
                         animate={{ scale: [1, 1.08, 1] }}
@@ -188,7 +188,7 @@ export function About() {
                         className="relative mb-3"
                       >
                         <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-purple-50 text-purple-600">
+                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/10 text-purple-500 dark:bg-purple-500/20 dark:text-purple-400">
                           <Code2 className="h-6 w-6" aria-hidden="true" />
                         </div>
                       </motion.div>
@@ -204,7 +204,7 @@ export function About() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.24, ease: [0.25, 0.46, 0.45, 0.94] }}
                       whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
-                      className="group relative rounded-3xl border border-border bg-white p-4 text-center transition-all duration-300 hover:shadow-xl"
+                      className="group relative rounded-3xl border border-border bg-card-bg p-4 text-center transition-all duration-300 hover:shadow-xl"
                     >
                       <motion.div
                         animate={{ scale: [1, 1.08, 1] }}
@@ -212,7 +212,7 @@ export function About() {
                         className="relative mb-3"
                       >
                         <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-50 text-green-600">
+                        <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-500 dark:bg-green-500/20 dark:text-green-400">
                           <Target className="h-6 w-6" aria-hidden="true" />
                         </div>
                       </motion.div>
@@ -226,102 +226,102 @@ export function About() {
             </motion.div>
           </motion.div>
 
-            {/* Skills Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <span className="section-subheading">Tech Stack</span>
-                <h3 className="mt-2 section-heading">Skills & Technologies</h3>
-              </div>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {skillCategories.map((cat, index) => (
-                  <motion.article
-                    key={cat.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.06 }}
-                    className="group relative rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:shadow-lg hover:border-border-hover hover:-translate-y-1"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
-                        <cat.icon className="h-5 w-5" />
-                      </div>
-                      <h4 className="font-semibold text-fg-primary">{cat.title}</h4>
+          {/* Skills Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <span className="section-subheading">Tech Stack</span>
+              <h3 className="mt-2 section-heading">Skills & Technologies</h3>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {skillCategories.map((cat, index) => (
+                <motion.article
+                  key={cat.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.06 }}
+                  className="group relative rounded-2xl border border-border bg-card-bg p-6 transition-all duration-300 hover:shadow-lg hover:border-border-hover hover:-translate-y-1"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-xl bg-blue-500/10 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400">
+                      <cat.icon className="h-5 w-5" />
                     </div>
-                    <p className="text-sm leading-[1.75] text-fg-secondary prose-sm">
-                      {cat.items.join("  ·  ")}
-                    </p>
-                  </motion.article>
-                ))}
-              </div>
-            </motion.div>
+                    <h4 className="font-semibold text-fg-primary">{cat.title}</h4>
+                  </div>
+                  <p className="text-sm leading-[1.75] text-fg-secondary prose-sm">
+                    {cat.items.join("  ·  ")}
+                  </p>
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
 
-            {/* Achievements Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <span className="section-subheading">Recognition</span>
-                <h3 className="mt-2 section-heading">Achievements</h3>
-              </div>
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {achievements.map((item, index) => (
-                  <motion.article
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    className="group relative rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:shadow-lg hover:border-border-hover hover:-translate-y-1"
-                  >
-                    <div className="p-3 rounded-xl bg-blue-50 text-blue-600 inline-block">
-                      <item.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
-                    <h4 className="mt-4 text-sm font-semibold text-fg-primary">{item.title}</h4>
-                    <p className="mt-1 text-sm text-fg-secondary">{item.subtitle}</p>
-                    {item.description && (
-                      <p className="mt-4 text-sm leading-relaxed text-fg-secondary">{item.description}</p>
-                    )}
-                  </motion.article>
-                ))}
-              </div>
-            </motion.div>
+          {/* Achievements Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <span className="section-subheading">Recognition</span>
+              <h3 className="mt-2 section-heading">Achievements</h3>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {achievements.map((item, index) => (
+                <motion.article
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className="group relative rounded-2xl border border-border bg-card-bg p-6 transition-all duration-300 hover:shadow-lg hover:border-border-hover hover:-translate-y-1"
+                >
+                  <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400 inline-block">
+                    <item.icon className="h-6 w-6" aria-hidden="true" />
+                  </div>
+                  <h4 className="mt-4 text-sm font-semibold text-fg-primary">{item.title}</h4>
+                  <p className="mt-1 text-sm text-fg-secondary">{item.subtitle}</p>
+                  {item.description && (
+                    <p className="mt-4 text-sm leading-relaxed text-fg-secondary">{item.description}</p>
+                  )}
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
 
-            {/* Current Focus Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <span className="section-subheading">Current Focus</span>
-                <h3 className="mt-2 section-heading">Currently Learning</h3>
-              </div>
-              <div className="flex flex-wrap justify-center gap-3">
-                {focusItems.map((item, index) => (
-                  <motion.span
-                    key={item}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    className="rounded-lg border border-border px-4 py-2 text-sm text-fg-primary transition-colors hover:border-border-hover hover:bg-surface"
-                  >
-                    {item}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+          {/* Current Focus Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <span className="section-subheading">Current Focus</span>
+              <h3 className="mt-2 section-heading">Currently Learning</h3>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              {focusItems.map((item, index) => (
+                <motion.span
+                  key={item}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="rounded-lg border border-border px-4 py-2 text-sm text-fg-primary transition-colors hover:border-border-hover hover:bg-surface"
+                >
+                  {item}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
+    </div>
     </section>
   );
 }

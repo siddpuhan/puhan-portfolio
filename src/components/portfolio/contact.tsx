@@ -22,8 +22,8 @@ function TwitterIcon({ className }: { className?: string }) {
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-fg-primary outline-none transition-colors duration-200 placeholder:text-fg-muted focus:border-fg-primary ${
-    hasError ? "border-red-400" : "border-border"
+  return `w-full rounded-lg border bg-input-bg px-4 py-2.5 text-sm text-fg-primary outline-none transition-colors duration-200 placeholder:text-input-placeholder focus:border-input-border-focus ${
+    hasError ? "border-red-400" : "border-input-border"
   }`;
 }
 
@@ -63,19 +63,19 @@ export function Contact() {
             initial={{ opacity: 0, scale: 0.96, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="mt-10 flex flex-col items-center gap-4 rounded-2xl border border-green-200 bg-green-50 px-6 py-10 text-center"
+            className="success-toast"
           >
             <motion.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.15, type: "spring", stiffness: 260, damping: 18 }}
-              className="flex h-14 w-14 items-center justify-center rounded-full bg-green-100"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-success-icon/10"
             >
-              <CheckCircle className="h-8 w-8 text-green-600" />
+              <CheckCircle className="h-8 w-8 text-success-icon" />
             </motion.span>
             <div>
-              <p className="text-lg font-semibold text-green-800">Message sent successfully!</p>
-              <p className="mt-2 text-sm leading-relaxed text-green-700">
+              <p className="text-lg font-semibold text-success-text">Message sent successfully!</p>
+              <p className="mt-2 text-sm leading-relaxed text-success-text-secondary">
                 Thank you for reaching out. A confirmation email is on its way to your inbox, and I&apos;ll get back to you within 24&ndash;48 hours.
               </p>
             </div>
@@ -113,7 +113,7 @@ export function Contact() {
                 placeholder="Your name"
               />
               {fieldErrors?.name && (
-                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.name}</p>
+                <p className="mt-1.5 text-sm text-red-600 dark:text-red-400">{fieldErrors.name}</p>
               )}
             </div>
 
@@ -132,7 +132,7 @@ export function Contact() {
                 placeholder="your@email.com"
               />
               {fieldErrors?.email && (
-                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.email}</p>
+                <p className="mt-1.5 text-sm text-red-600 dark:text-red-400">{fieldErrors.email}</p>
               )}
             </div>
 
@@ -151,7 +151,7 @@ export function Contact() {
                 placeholder="What is this about?"
               />
               {fieldErrors?.subject && (
-                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.subject}</p>
+                <p className="mt-1.5 text-sm text-red-600 dark:text-red-400">{fieldErrors.subject}</p>
               )}
             </div>
 
@@ -171,7 +171,7 @@ export function Contact() {
                 placeholder="Tell me about your project, opportunity, or anything else..."
               />
               {fieldErrors?.message && (
-                <p className="mt-1.5 text-sm text-red-600">{fieldErrors.message}</p>
+                <p className="mt-1.5 text-sm text-red-600 dark:text-red-400">{fieldErrors.message}</p>
               )}
             </div>
 
@@ -179,17 +179,17 @@ export function Contact() {
               <motion.div
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 p-3"
+                className="error-toast"
               >
-                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
-                <p className="text-sm text-red-700">{state.error}</p>
+                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-error-icon" />
+                <p className="text-sm text-error-text-secondary">{state.error}</p>
               </motion.div>
             )}
 
             <button
               type="submit"
               disabled={pending}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-fg-primary px-6 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-accent-hover hover:shadow-[0_4px_16px_rgba(37,99,235,0.25)] hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn-primary"
             >
               {pending && <Loader2 className="h-4 w-4 animate-spin" />}
               {pending ? "Sending..." : "Send Message"}

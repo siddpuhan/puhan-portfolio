@@ -56,6 +56,7 @@ function CustomCursorInner() {
       document.removeEventListener("mouseover", onEnter);
       document.removeEventListener("mouseout", onLeave);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!mounted) return null;
@@ -63,7 +64,7 @@ function CustomCursorInner() {
   return (
     <>
       <motion.div
-        className="pointer-events-none fixed z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-fg-primary bg-transparent"
+        className="pointer-events-none fixed z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-cursor-ring bg-transparent"
         style={{
           left: springX,
           top: springY,
@@ -73,7 +74,7 @@ function CustomCursorInner() {
         }}
       />
       <motion.div
-        className="pointer-events-none fixed z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full bg-fg-primary"
+        className="pointer-events-none fixed z-[9999] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cursor-dot"
         style={{
           left: mouseX,
           top: mouseY,

@@ -56,9 +56,9 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       <div className={`grid gap-10 lg:grid-cols-2 lg:gap-14 ${isEven ? "" : "lg:[grid-template-areas:_'content_media']"}`}>
         <div className="flex flex-col justify-center lg:pe-8" style={{ gridArea: isEven ? undefined : "content" }}>
           <motion.span
-            whileHover={{ scale: 1.05, backgroundColor: "#fafafa", borderColor: "#111827" }}
+            whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 17, duration: 0.2 }}
-            className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-gray-900"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card-bg px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-fg-primary"
           >
             <span className="relative h-1.5 w-1.5 rounded-full bg-blue-500" aria-hidden="true" />
             {project.category}
@@ -110,20 +110,20 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
         <div className="relative aspect-[4/3] group" style={{ gridArea: isEven ? undefined : "media" }}>
           <motion.div
-            className="relative w-full h-full rounded-2xl border border-gray-300 bg-white shadow-lg overflow-hidden"
+            className="project-card-browser"
             whileHover={{
-              borderColor: "#111827",
-              boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+              borderColor: "var(--card-border-hover)",
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
               y: -3,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            <div className="flex items-center gap-1.5 px-3 py-2.5 bg-white border-b border-gray-300">
+            <div className="flex items-center gap-1.5 px-3 py-2.5 bg-card-bg border-b border-card-border">
               <div className="w-3 h-3 rounded-full bg-red-400" />
               <div className="w-3 h-3 rounded-full bg-yellow-400" />
               <div className="w-3 h-3 rounded-full bg-green-400" />
             </div>
-            <div className="relative w-full h-[calc(100%-36px)] bg-[var(--mockup-bg)] p-5 overflow-hidden flex items-center justify-center">
+            <div className="relative w-full h-[calc(100%-36px)] bg-mockup-bg p-5 overflow-hidden flex items-center justify-center">
               <Image
                 src={project.image}
                 alt={project.title}
@@ -131,13 +131,13 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-contain transition-all duration-500 ease-[0.25,0.46,0.45,0.94] group-hover:scale-103 group-hover:-translate-y-2 group-hover:brightness-105"
                 priority={index < 2}
-                style={{ objectFit: "contain", backgroundColor: "#f8fafc" }}
+                style={{ objectFit: "contain", backgroundColor: "var(--mockup-bg)" }}
               />
             </div>
           </motion.div>
 
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 pointer-events-none">
-            <div className="rounded-lg bg-white/90 backdrop-blur-sm px-3 py-1.5 text-[11px] font-medium text-fg-secondary">
+            <div className="rounded-lg bg-card-bg/90 backdrop-blur-sm px-3 py-1.5 text-[11px] font-medium text-fg-secondary">
               {project.category}
             </div>
             <motion.a
@@ -147,7 +147,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
               href={project.demo}
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg bg-white/90 backdrop-blur-sm p-2 text-fg-secondary transition-colors hover:text-accent-hover"
+              className="rounded-lg bg-card-bg/90 backdrop-blur-sm p-2 text-fg-secondary transition-colors hover:text-accent-hover"
               aria-label={`View ${project.title} live demo`}
             >
               <ExternalLink className="h-4 w-4" />

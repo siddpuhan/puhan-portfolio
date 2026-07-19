@@ -3,6 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const sections = [
   { label: "About", href: "#about" },
@@ -82,19 +83,12 @@ export function Nav() {
           paddingBottom: scrolled ? "8px" : "8px",
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="flex items-center gap-6 rounded-[999px] border border-border/60 bg-white/80 backdrop-blur-[20px] shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.03)]"
+        className="flex items-center gap-6 rounded-[999px] border border-nav-border bg-nav-bg backdrop-blur-[20px] shadow-nav-shadow"
         style={{ height: scrolled ? "48px" : "56px" }}
         role="navigation"
         aria-label="Main navigation"
       >
-        <a
-          href="#hero"
-          onClick={scrollTo("#hero")}
-          className="text-sm font-semibold tracking-tight text-fg-primary flex-shrink-0"
-          aria-label="Siddharth Puhan - Home"
-        >
-          SP
-        </a>
+        <ThemeToggle className="flex-shrink-0" />
 
         <div className="hidden lg:flex items-center gap-1">
           {sections.map((item) => (
@@ -144,7 +138,7 @@ export function Nav() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="mx-auto max-w-sm rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-lg p-4"
+              className="mx-auto max-w-sm rounded-2xl border border-border bg-card-bg backdrop-blur-xl shadow-lg p-4"
             >
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm font-semibold tracking-tight text-fg-primary">SP</span>
